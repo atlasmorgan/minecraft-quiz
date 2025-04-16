@@ -31,22 +31,35 @@
   </div>
 
   <script>
+    // const questions = [
+    //   { question: "What do you need to make a Nether Portal?", options: ["Obsidian and Flint & Steel", "Obsidian and Lava", "Diamond and Ender Pearl", "Bedrock and Lava"], answer: "Obsidian and Flint & Steel" },
+    //   { question: "Which mob explodes when it gets close to you?", options: ["Skeleton", "Enderman", "Creeper", "Zombie"], answer: "Creeper" },
+    //   { question: "What is the rarest ore in Minecraft?", options: ["Diamond", "Emerald", "Netherite", "Lapis Lazuli"], answer: "Emerald" },
+    //   { question: "What item do you need to tame a horse?", options: ["Apple", "Wheat", "Saddle", "Nothing (just ride it)"], answer: "Nothing (just ride it)" },
+    //   { question: "What biome do pandas spawn in?", options: ["Jungle", "Swamp", "Plains", "Taiga"], answer: "Jungle" },
+    //   { question: "Which tool do you need to mine diamonds?", options: ["Stone Pickaxe", "Wooden Pickaxe", "Iron Pickaxe", "Gold Pickaxe"], answer: "Iron Pickaxe" },
+    //   { question: "What item lets you breathe underwater?", options: ["Water Bottle", "Turtle Shell Helmet", "Potion of Healing", "Golden Apple"], answer: "Turtle Shell Helmet" },
+    //   { question: "Which dimension has End Cities?", options: ["Nether", "Overworld", "The End", "Skylands"], answer: "The End" },
+    //   { question: "What block do Endermen pick up?", options: ["Grass Block", "Dirt", "Sand", "Stone"], answer: "Grass Block" },
+    //   { question: "What animal can be milked?", options: ["Pig", "Cat or cow 🥴", "Wolf", "Sheep"], answer: "Cat or cow 🥴" },
+    //   { question: "Which enchantment makes you swim faster?", options: ["Depth Strider", "Feather Falling", "Aqua Affinity", "Thorns"], answer: "Depth Strider" },
+    //   { question: "What structure do you find Guardians in?", options: ["Ocean Monument", "Desert Temple", "Jungle Temple", "Stronghold"], answer: "Ocean Monument" },
+    //   { question: "Which mob drops string?", options: ["Spider", "Skeleton", "Zombie", "Slime"], answer: "Spider" },
+    //   { question: "What do bees do near flowers?", options: ["Attack", "Pollinate", "Sleep", "Dig"], answer: "Pollinate" },
+    //   { question: "What happens when you sleep in the Nether?", options: ["Nothing", "You teleport", "The bed explodes", "You wake up in the End"], answer: "The bed explodes" }
+    // ];
+    
     const questions = [
-      { question: "What do you need to make a Nether Portal?", options: ["Obsidian and Flint & Steel", "Obsidian and Lava", "Diamond and Ender Pearl", "Bedrock and Lava"], answer: "Obsidian and Flint & Steel" },
-      { question: "Which mob explodes when it gets close to you?", options: ["Skeleton", "Enderman", "Creeper", "Zombie"], answer: "Creeper" },
-      { question: "What is the rarest ore in Minecraft?", options: ["Diamond", "Emerald", "Netherite", "Lapis Lazuli"], answer: "Emerald" },
-      { question: "What item do you need to tame a horse?", options: ["Apple", "Wheat", "Saddle", "Nothing (just ride it)"], answer: "Nothing (just ride it)" },
-      { question: "What biome do pandas spawn in?", options: ["Jungle", "Swamp", "Plains", "Taiga"], answer: "Jungle" },
-      { question: "Which tool do you need to mine diamonds?", options: ["Stone Pickaxe", "Wooden Pickaxe", "Iron Pickaxe", "Gold Pickaxe"], answer: "Iron Pickaxe" },
-      { question: "What item lets you breathe underwater?", options: ["Water Bottle", "Turtle Shell Helmet", "Potion of Healing", "Golden Apple"], answer: "Turtle Shell Helmet" },
-      { question: "Which dimension has End Cities?", options: ["Nether", "Overworld", "The End", "Skylands"], answer: "The End" },
-      { question: "What block do Endermen pick up?", options: ["Grass Block", "Dirt", "Sand", "Stone"], answer: "Grass Block" },
-      { question: "What animal can be milked?", options: ["Pig", "Cat or cow 🥴", "Wolf", "Sheep"], answer: "Cat or cow 🥴" },
-      { question: "Which enchantment makes you swim faster?", options: ["Depth Strider", "Feather Falling", "Aqua Affinity", "Thorns"], answer: "Depth Strider" },
-      { question: "What structure do you find Guardians in?", options: ["Ocean Monument", "Desert Temple", "Jungle Temple", "Stronghold"], answer: "Ocean Monument" },
-      { question: "Which mob drops string?", options: ["Spider", "Skeleton", "Zombie", "Slime"], answer: "Spider" },
-      { question: "What do bees do near flowers?", options: ["Attack", "Pollinate", "Sleep", "Dig"], answer: "Pollinate" },
-      { question: "What happens when you sleep in the Nether?", options: ["Nothing", "You teleport", "The bed explodes", "You wake up in the End"], answer: "The bed explodes" }
+      { question: "What year was Fortnite Battle Royale released?", options: ["2015", "2016", "2017", "2018"], answer: "2017" },
+      { question: "What is the name of the Fortnite island's shrinking area?", options: ["The Fog", "The Zone", "The Storm", "The Barrier"], answer: "The Storm" },
+      { question: "What material cannot be harvested in Fortnite?", options: ["Wood", "Metal", "Stone", "Plastic"], answer: "Plastic" },
+      { question: "Which company developed Fortnite?", options: ["EA", "Activision", "Epic Games", "Ubisoft"], answer: "Epic Games" },
+      { question: "What is the maximum number of players in a standard Battle Royale match?", options: ["50", "75", "100", "150"], answer: "100" },
+      { question: "Which mode features PvE gameplay?", options: ["Creative", "Battle Royale", "Save the World", "Arena"], answer: "Save the World" },
+      { question: "Which Marvel character had an entire season based on them?", options: ["Iron Man", "Hulk", "Spider-Man", "Black Widow"], answer: "Iron Man" },
+      { question: "What is the in-game currency called?", options: ["F-Coins", "V-Bucks", "Fort-Bucks", "Epic Coins"], answer: "V-Bucks" },
+      { question: "Which item lets you glide again after jumping?", options: ["Jetpack", "Glider Redeploy", "Shockwave Grenade", "Bouncer"], answer: "Glider Redeploy" },
+      { question: "What is the name of Fortnite’s creative sandbox mode?", options: ["Builder’s Paradise", "Sandbox", "Creative", "Freeplay"], answer: "Creative" }
     ];
 
     const images = [
