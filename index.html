@@ -3,117 +3,24 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Minecraft Quiz</title>
+  <title>Atlas's Quiz Tool</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <script src="https://unpkg.com/flowbite@1.5.1/dist/flowbite.js"></script>
 </head>
 <body class="bg-gradient-to-br from-green-200 to-blue-300 min-h-screen flex items-center justify-center p-4">
-  <div class="w-full max-w-xl bg-white rounded-2xl shadow-xl p-8">
-    <h1 class="text-3xl font-bold text-center text-green-700 mb-6">🌍 Minecraft Quiz</h1>
-
-    <!-- Progress Bar -->
-    <div class="w-full bg-gray-200 rounded-full h-4 mb-6">
-      <div id="progress-bar" class="bg-green-500 h-4 rounded-full transition-all duration-300" style="width: 0%"></div>
-    </div>
-
-    <div id="quiz-box">
-      <div class="flex justify-center mb-4">
-        <img id="quiz-image" src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/8/83/Grass_Block_JE4_BE4.png" alt="Minecraft" class="w-16 h-16">
-      </div>
-      <h2 id="question-number" class="text-xl font-semibold mb-2 text-center"></h2>
-      <h3 id="question-text" class="text-lg text-center mb-4"></h3>
-      <div class="space-y-2 mb-6" id="options"></div>
-      <div class="text-center">
-        <button id="next-btn" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200">Next</button>
-      </div>
-    </div>
-    <div class="text-center text-2xl font-bold text-purple-800 mt-6 hidden" id="result"></div>
-  </div>
-
-  <script>
-    const questions = [
-      { question: "What do you need to make a Nether Portal?", options: ["Obsidian and Flint & Steel", "Obsidian and Lava", "Diamond and Ender Pearl", "Bedrock and Lava"], answer: "Obsidian and Flint & Steel" },
-      { question: "Which mob explodes when it gets close to you?", options: ["Skeleton", "Enderman", "Creeper", "Zombie"], answer: "Creeper" },
-      { question: "What is the rarest ore in Minecraft?", options: ["Diamond", "Emerald", "Netherite", "Lapis Lazuli"], answer: "Emerald" },
-      { question: "What item do you need to tame a horse?", options: ["Apple", "Wheat", "Saddle", "Nothing (just ride it)"], answer: "Nothing (just ride it)" },
-      { question: "What biome do pandas spawn in?", options: ["Jungle", "Swamp", "Plains", "Taiga"], answer: "Jungle" },
-      { question: "Which tool do you need to mine diamonds?", options: ["Stone Pickaxe", "Wooden Pickaxe", "Iron Pickaxe", "Gold Pickaxe"], answer: "Iron Pickaxe" },
-      { question: "What item lets you breathe underwater?", options: ["Water Bottle", "Turtle Shell Helmet", "Potion of Healing", "Golden Apple"], answer: "Turtle Shell Helmet" },
-      { question: "Which dimension has End Cities?", options: ["Nether", "Overworld", "The End", "Skylands"], answer: "The End" },
-      { question: "What block do Endermen pick up?", options: ["Grass Block", "Dirt", "Sand", "Stone"], answer: "Grass Block" },
-      { question: "What animal can be milked?", options: ["Pig", "Cat or cow 🥴", "Wolf", "Sheep"], answer: "Cat or cow 🥴" },
-      { question: "Which enchantment makes you swim faster?", options: ["Depth Strider", "Feather Falling", "Aqua Affinity", "Thorns"], answer: "Depth Strider" },
-      { question: "What structure do you find Guardians in?", options: ["Ocean Monument", "Desert Temple", "Jungle Temple", "Stronghold"], answer: "Ocean Monument" },
-      { question: "Which mob drops string?", options: ["Spider", "Skeleton", "Zombie", "Slime"], answer: "Spider" },
-      { question: "What do bees do near flowers?", options: ["Attack", "Pollinate", "Sleep", "Dig"], answer: "Pollinate" },
-      { question: "What happens when you sleep in the Nether?", options: ["Nothing", "You teleport", "The bed explodes", "You wake up in the End"], answer: "The bed explodes" }
-    ];
+  <div class="w-full max-w-xl bg-white rounded-2xl shadow-xl p-8 text-center">
+    <h1 class="text-3xl font-bold text-green-700 mb-8">🧠 Atlas's Quiz Tool</h1>
     
-    const images = [
-      "https://images.surferseo.art/fa1a5efa-220a-46a8-973d-e1254bf67afe.png",
-      "https://s.yimg.com/ny/api/res/1.2/Hl4TbSjiFctjuZg229Nufw--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyNDI7aD02OTk-/https://media.zenfs.com/en/cnet_articles_178/24d8aae94bb04d5b5b4ea34424d3d675",
-      "https://atlas-content-cdn.pixelsquid.com/stock-images/minecraft-diamond-ore-cube-4G3Pm6B-600.jpg",
-      "https://content.instructables.com/FUV/YK09/IPQMB6ZV/FUVYK09IPQMB6ZV.png?auto=webp&fit=bounds&frame=1&width=1024auto=webp&frame=1&height=300",
-      "https://pm1.aminoapps.com/7061/5434cd4c83c92ce1ea5f4ffdc7c3fa3ca252b5e2r1-280-261v2_hq.jpg",
-      "https://minecraft-max.net/upload/iblock/1de/1de4bb305ad688cb6aa02ee2c45f6669.png",
-      "https://tagn.wordpress.com/wp-content/uploads/2018/07/113fishinalukewarmocean.png?w=600&h=355",
-      "https://cdn.apexminecrafthosting.com/img/uploads/2022/10/06190651/end-city.png",
-      "https://minecraftfaces.com/wp-content/bigfaces/big-enderman-face.png",
-      "https://www.canteach.ca/minecraft-pe/images/milk.gif",
-      "https://thumbnail.imgbin.com/24/12/0/imgbin-minecraft-pocket-edition-enchanted-book-wiki-magic-book-gmvtKnXhCsMADm5AgSqjp01C7_t.jpg",
-      "https://www.blendswap.com/blend_previews/15399/0/0?u=2019-07-17%2017:24:58",
-      "https://minecraft-max.net/upload/resize_cache/iblock/06b/320_320_14a821bd1cef7808de0ee325b13280e30/06bbeaf82e89a920baa1c358614302a6.png",
-      "https://www.pngitem.com/pimgs/m/107-1079509_bee-minecraft-bee-png-transparent-png.png",
-      "https://images.surferseo.art/b422f0f6-17b3-4e9b-9bb0-eca79a837dff.png"      
-    ];
+    <p class="mb-6 text-lg text-gray-700">Choose a quiz to get started:</p>
 
-    let currentQuestion = 0;
-    let score = 0;
-    const questionText = document.getElementById("question-text");
-    const questionNumber = document.getElementById("question-number");
-    const optionsDiv = document.getElementById("options");
-    const nextBtn = document.getElementById("next-btn");
-    const resultDiv = document.getElementById("result");
-    const quizBox = document.getElementById("quiz-box");
-    const progressBar = document.getElementById("progress-bar");
-    const quizImage = document.getElementById("quiz-image");
-
-    function loadQuestion(index) {
-      const q = questions[index];
-      questionNumber.textContent = `Question ${index + 1} of ${questions.length}`;
-      questionText.textContent = q.question;
-      optionsDiv.innerHTML = "";
-
-      quizImage.src = images[index % images.length];
-
-      q.options.forEach(option => {
-        const label = document.createElement("label");
-        label.className = "block bg-gray-100 hover:bg-gray-200 rounded-lg p-2 cursor-pointer";
-        label.innerHTML = `<input type="radio" name="answer" value="${option}" class="mr-2"> ${option}`;
-        optionsDiv.appendChild(label);
-      });
-
-      const progress = ((index) / questions.length) * 100;
-      progressBar.style.width = `${progress}%`;
-    }
-
-    nextBtn.addEventListener("click", () => {
-      const selected = document.querySelector('input[name="answer"]:checked');
-      if (!selected) return alert("Please select an answer before proceeding.");
-      if (selected.value === questions[currentQuestion].answer) score++;
-
-      currentQuestion++;
-      if (currentQuestion < questions.length) {
-        loadQuestion(currentQuestion);
-      } else {
-        progressBar.style.width = "100%";
-        quizBox.style.display = "none";
-        resultDiv.classList.remove("hidden");
-        resultDiv.textContent = `🎉 You scored ${score} out of ${questions.length}!`;
-      }
-    });
-
-    loadQuestion(currentQuestion);
-  </script>
+    <div class="space-y-4">
+      <a href="/minecraft.html" class="block w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-lg transition duration-200 shadow-md">
+        🟩 Minecraft Quiz
+      </a>
+      <a href="/fortnite.html" class="block w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg transition duration-200 shadow-md">
+        💥 Fortnite Quiz
+      </a>
+    </div>
+  </div>
 </body>
 </html>
