@@ -115,6 +115,12 @@
       }
     });
 
+    userAnswerInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        submitBtn.click();
+      }
+    });
+
     function loadNextQuestion() {
       userAnswerInput.value = "";
       questionNumber.textContent = `Question ${currentQuestion + 1} of ${totalQuestions}`;
