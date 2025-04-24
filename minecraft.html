@@ -9,8 +9,6 @@
 </head>
 <body class="bg-gradient-to-br from-green-200 to-blue-300 min-h-screen flex items-center justify-center p-4">
 
-
-
   <div class="w-full max-w-xl bg-white rounded-2xl shadow-xl p-8">
     <h1 class="text-3xl font-bold text-center text-green-700 mb-6">🌍 Minecraft Quiz</h1>
 
@@ -30,29 +28,32 @@
         <button id="next-btn" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200">Next</button>
       </div>
     </div>
+    
     <div class="text-center text-2xl font-bold text-purple-800 mt-6 hidden" id="result"></div>
-  </div>
 
-  <!-- Music Player -->
-  <div class="w-full max-w-xl bg-white rounded-2xl shadow-lg p-4 mb-8 mt-8">
-    <h2 class="text-2xl font-bold text-center text-green-700 mb-4">🎵 Music Player</h2>
-    
-    <audio id="audio-player" src="https://ia801201.us.archive.org/0/items/C418-MinecraftSoundtrackVolumeAlpha/02%20-%20Door.mp3"></audio>
-    
-    <div class="flex items-center justify-center gap-4 mb-4">
-      <button id="play-btn" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full">
-        ▶️ Play
-      </button>
-      <button id="pause-btn" class="bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-2 px-4 rounded-full">
-        ⏸️ Pause
-      </button>
-      <button id="stop-btn" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full">
-        ⏹️ Stop
-      </button>
+    <!-- Music Player inside quiz container -->
+    <div class="w-full bg-white rounded-2xl shadow-lg p-4 mt-8">
+      <h2 class="text-2xl font-bold text-center text-green-700 mb-4">🎵 Music Player</h2>
+
+      <audio id="audio-player" src="https://ia801201.us.archive.org/0/items/C418-MinecraftSoundtrackVolumeAlpha/02%20-%20Door.mp3"></audio>
+
+      <div class="flex items-center justify-center gap-4 mb-4">
+        <button id="play-btn" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full">
+          ▶️ Play
+        </button>
+        <button id="pause-btn" class="bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-2 px-4 rounded-full">
+          ⏸️ Pause
+        </button>
+        <button id="stop-btn" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full">
+          ⏹️ Stop
+        </button>
+      </div>
+
+      <input id="seek-bar" type="range" value="0" class="w-full accent-green-500">
     </div>
     
-    <input id="seek-bar" type="range" value="0" class="w-full accent-green-500">
-  </div>
+  </div> <!-- End of the main container -->
+
   <script>
     const questions = [
       { question: "What do you need to make a Nether Portal?", options: ["Obsidian and Flint & Steel", "Obsidian and Lava", "Diamond and Ender Pearl", "Bedrock and Lava"], answer: "Obsidian and Flint & Steel" },
@@ -71,7 +72,7 @@
       { question: "What do bees do near flowers?", options: ["Attack", "Pollinate", "Sleep", "Dig"], answer: "Pollinate" },
       { question: "What happens when you sleep in the Nether?", options: ["Nothing", "You teleport", "The bed explodes", "You wake up in the End"], answer: "The bed explodes" }
     ];
-    
+
     const images = [
       "https://images.surferseo.art/fa1a5efa-220a-46a8-973d-e1254bf67afe.png",
       "https://s.yimg.com/ny/api/res/1.2/Hl4TbSjiFctjuZg229Nufw--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyNDI7aD02OTk-/https://media.zenfs.com/en/cnet_articles_178/24d8aae94bb04d5b5b4ea34424d3d675",
@@ -87,7 +88,7 @@
       "https://www.blendswap.com/blend_previews/15399/0/0?u=2019-07-17%2017:24:58",
       "https://minecraft-max.net/upload/resize_cache/iblock/06b/320_320_14a821bd1cef7808de0ee325b13280e30/06bbeaf82e89a920baa1c358614302a6.png",
       "https://www.pngitem.com/pimgs/m/107-1079509_bee-minecraft-bee-png-transparent-png.png",
-      "https://images.surferseo.art/b422f0f6-17b3-4e9b-9bb0-eca79a837dff.png"      
+      "https://images.surferseo.art/b422f0f6-17b3-4e9b-9bb0-eca79a837dff.png"
     ];
 
     let currentQuestion = 0;
@@ -137,7 +138,6 @@
     });
 
     loadQuestion(currentQuestion);
-    
   </script>
 
   <script>
@@ -160,13 +160,11 @@
       audio.currentTime = 0;
     });
 
-    // Update seek bar as audio plays
     audio.addEventListener('timeupdate', () => {
       const value = (audio.currentTime / audio.duration) * 100;
       seekBar.value = value || 0;
     });
 
-    // Scrub through the audio
     seekBar.addEventListener('input', () => {
       const time = (seekBar.value / 100) * audio.duration;
       audio.currentTime = time;
