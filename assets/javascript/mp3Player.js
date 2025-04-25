@@ -25,4 +25,4 @@ audio.addEventListener('timeupdate', () => {
 seekBar.addEventListener('input', () => {
   const time = (seekBar.value / 100) * audio.duration;
   audio.currentTime = time;
-});>
+});
