@@ -6,6 +6,7 @@
   <title>Minecraft Quiz</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <script src="https://unpkg.com/flowbite@1.5.1/dist/flowbite.js"></script>
+  <script src="./assets/javascript/mp3Player.js"></script>
 </head>
 <body class="bg-gradient-to-br from-green-200 to-blue-300 min-h-screen flex items-center justify-center p-4">
 
@@ -138,37 +139,6 @@
     });
 
     loadQuestion(currentQuestion);
-  </script>
-
-  <script>
-    const audio = document.getElementById('audio-player');
-    const playBtn = document.getElementById('play-btn');
-    const pauseBtn = document.getElementById('pause-btn');
-    const stopBtn = document.getElementById('stop-btn');
-    const seekBar = document.getElementById('seek-bar');
-
-    playBtn.addEventListener('click', () => {
-      audio.play();
-    });
-
-    pauseBtn.addEventListener('click', () => {
-      audio.pause();
-    });
-
-    stopBtn.addEventListener('click', () => {
-      audio.pause();
-      audio.currentTime = 0;
-    });
-
-    audio.addEventListener('timeupdate', () => {
-      const value = (audio.currentTime / audio.duration) * 100;
-      seekBar.value = value || 0;
-    });
-
-    seekBar.addEventListener('input', () => {
-      const time = (seekBar.value / 100) * audio.duration;
-      audio.currentTime = time;
-    });
   </script>
 
 </body>
