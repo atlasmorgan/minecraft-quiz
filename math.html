@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Math Quiz</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gradient-to-br from-yellow-100 to-pink-200 min-h-screen flex items-center justify-center p-4">
+  <div class="w-full max-w-xl bg-white rounded-2xl shadow-xl p-8">
+    <h1 class="text-3xl font-bold text-center text-pink-600 mb-6">➗✖️ Math Quiz</h1>
+
+    <!-- Progress Bar -->
+    <div class="w-full bg-gray-200 rounded-full h-4 mb-6">
+      <div id="progress-bar" class="bg-pink-400 h-4 rounded-full transition-all duration-300" style="width: 0%"></div>
+    </div>
+
+    <div id="quiz-box">
+      <h2 id="question-number" class="text-xl font-semibold mb-2 text-center"></h2>
+      <h3 id="question-text" class="text-lg text-center mb-6"></h3>
+      <div class="flex justify-center mb-4">
+        <input id="user-answer" type="number" class="border-2 border-gray-300 rounded-lg p-2 w-32 text-center" placeholder="Your answer">
+      </div>
+      <div id="feedback" class="text-center text-lg font-semibold mb-4"></div>
+      <div class="text-center">
+        <button id="submit-btn" class="bg-pink-500 hover:bg-pink-600 text-white font-semibold py-2 px-6 rounded-lg transition duration-200">Submit</button>
+      </div>
+    </div>
+
+    <div class="text-center text-2xl font-bold text-green-700 mt-6 hidden" id="result"></div>
+  </div>
+
+  <script>
+    const totalQuestions = 10;
+    let currentQuestion = 0;
+    let score = 0;
+
+    const questionNumber = document.getElementById("question-number");
+    const questionText = document.getElementById("question-text");
+    const userAnswerInput = document.getElementById("user-answer");
+    const submitBtn = document.getElementById("submit-btn");
+    const resultDiv = document.getElementById("result");
+    const quizBox = document.getElementById("quiz-box");
+    const progressBar = document.getElementById("progress-bar");
+    const feedback = document.getElementById("feedback");
+
+    let currentCorrectAnswer = 0;
+
+    function generateQuestion() {
+      const operations = ["*", "/"];
+      const operation = operations[Math.floor(Math.random() * operations.length)];
+
+      let a, b;
+
+      if (operation === "*") {
+        a = getRandomInt(4, 12);
+        b = getRandomInt(0, 12);
+        currentCorrectAnswer = a * b;
+        questionText.textContent = `What is ${a} × ${b}?`;
+      } else {
+        b = getRandomInt(1, 12);
+        currentCorrectAnswer = getRandomInt(2, 12);
+        a = b * currentCorrectAnswer;
+        questionText.textContent = `What is ${a} ÷ ${b}?`;
+      }
+    }
+
+    function getRandomInt(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function updateProgress() {
+      const progress = (currentQuestion / totalQuestions) * 100;
+      progressBar.style.width = `${progress}%`;
+    }
+
+    function getGrade(score, total) {
+      const percentage = (score / total) * 100;
+      if (percentage === 100) return "A+";
+      if (percentage >= 90) return "A";
+      if (percentage >= 80) return "B";
+      if (percentage >= 70) return "C";
+      if (percentage >= 60) return "D";
+      return "F";
+    }
+
+    submitBtn.addEventListener("click", () => {
+      const userAnswer = parseInt(userAnswerInput.value);
+
+      if (isNaN(userAnswer)) {
+        alert("Please enter a valid number.");
+        return;
+      }
+
+      if (userAnswer === currentCorrectAnswer) {
+        feedback.textContent = "✅ Correct!";
+        feedback.className = "text-green-600 text-center text-lg font-semibold mb-4";
+        score++;
+      } else {
+        feedback.textContent = `❌ Wrong. The correct answer was ${currentCorrectAnswer}.`;
+        feedback.className = "text-red-600 text-center text-lg font-semibold mb-4";
+      }
+
+      currentQuestion++;
+
+      if (currentQuestion < totalQuestions) {
+        setTimeout(() => {
+          loadNextQuestion();
+          feedback.textContent = "";
+        }, 1500);
+      } else {
+        setTimeout(() => {
+          finishQuiz();
+        }, 1500);
+      }
+    });
+
+    function loadNextQuestion() {
+      userAnswerInput.value = "";
+      questionNumber.textContent = `Question ${currentQuestion + 1} of ${totalQuestions}`;
+      generateQuestion();
+      updateProgress();
+    }
+
+    function finishQuiz() {
+      quizBox.style.display = "none";
+      resultDiv.classList.remove("hidden");
+      const grade = getGrade(score, totalQuestions);
+      resultDiv.innerHTML = `🎉 You scored <span class="text-pink-600">${score}</span> out of <span class="text-pink-600">${totalQuestions}</span>!<br>Grade: <span class="text-pink-600">${grade}</span>`;
+      progressBar.style.width = "100%";
+    }
+
+    // Start the quiz
+    loadNextQuestion();
+  </script>
+</body>
+</html>
