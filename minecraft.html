@@ -8,6 +8,28 @@
   <script src="https://unpkg.com/flowbite@1.5.1/dist/flowbite.js"></script>
 </head>
 <body class="bg-gradient-to-br from-green-200 to-blue-300 min-h-screen flex items-center justify-center p-4">
+
+  <!-- Music Player -->
+  <div class="w-full max-w-xl bg-white rounded-2xl shadow-lg p-4 mb-8">
+    <h2 class="text-2xl font-bold text-center text-green-700 mb-4">🎵 Music Player</h2>
+    
+    <audio id="audio-player" src="https://ia801201.us.archive.org/0/items/C418-MinecraftSoundtrackVolumeAlpha/02%20-%20Door.mp3"></audio>
+    
+    <div class="flex items-center justify-center gap-4 mb-4">
+      <button id="play-btn" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full">
+        ▶️ Play
+      </button>
+      <button id="pause-btn" class="bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-2 px-4 rounded-full">
+        ⏸️ Pause
+      </button>
+      <button id="stop-btn" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full">
+        ⏹️ Stop
+      </button>
+    </div>
+    
+    <input id="seek-bar" type="range" value="0" class="w-full accent-green-500">
+  </div>
+
   <div class="w-full max-w-xl bg-white rounded-2xl shadow-xl p-8">
     <h1 class="text-3xl font-bold text-center text-green-700 mb-6">🌍 Minecraft Quiz</h1>
 
@@ -114,6 +136,41 @@
     });
 
     loadQuestion(currentQuestion);
+    
   </script>
+
+  <script>
+    const audio = document.getElementById('audio-player');
+    const playBtn = document.getElementById('play-btn');
+    const pauseBtn = document.getElementById('pause-btn');
+    const stopBtn = document.getElementById('stop-btn');
+    const seekBar = document.getElementById('seek-bar');
+
+    playBtn.addEventListener('click', () => {
+      audio.play();
+    });
+
+    pauseBtn.addEventListener('click', () => {
+      audio.pause();
+    });
+
+    stopBtn.addEventListener('click', () => {
+      audio.pause();
+      audio.currentTime = 0;
+    });
+
+    // Update seek bar as audio plays
+    audio.addEventListener('timeupdate', () => {
+      const value = (audio.currentTime / audio.duration) * 100;
+      seekBar.value = value || 0;
+    });
+
+    // Scrub through the audio
+    seekBar.addEventListener('input', () => {
+      const time = (seekBar.value / 100) * audio.duration;
+      audio.currentTime = time;
+    });
+  </script>
+
 </body>
 </html>
